@@ -1,5 +1,8 @@
 import { z } from "zod";
 
+export const PASSWORD_MIN_LENGTH = 8;
+export const PASSWORD_MAX_LENGTH = 72;
+
 export const emailSchema = z
   .string({ required_error: "Email is required" })
   .trim()
@@ -9,8 +12,8 @@ export const emailSchema = z
 
 export const passwordSchema = z
   .string({ required_error: "Password is required" })
-  .min(8, "Password must be at least 8 characters")
-  .max(72, "Password must be 72 characters or less")
+  .min(PASSWORD_MIN_LENGTH, `Password must be at least ${PASSWORD_MIN_LENGTH} characters`)
+  .max(PASSWORD_MAX_LENGTH, `Password must be ${PASSWORD_MAX_LENGTH} characters or less`)
   .refine((v) => !/\s/.test(v), "Password must not contain whitespace")
   .refine((v) => !/[<>]/.test(v), "Password must not contain '<' or '>'");
 
@@ -29,4 +32,3 @@ export const quantitySchema = z
 
 export type LoginInput = z.infer<typeof loginSchema>;
 export type RegisterInput = z.infer<typeof registerSchema>;
-

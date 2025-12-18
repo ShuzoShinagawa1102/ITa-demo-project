@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ApiError } from "../api/http";
 import { useAuth } from "../state/auth";
-import { registerSchema } from "../validation/schemas";
+import { PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH, registerSchema } from "../validation/schemas";
 
 export default function RegisterPage() {
   const auth = useAuth();
@@ -42,7 +42,7 @@ export default function RegisterPage() {
       <h2 style={{ marginTop: 0 }}>Register</h2>
       <p className="muted">メールアドレスとパスワードでアカウントを作成します（パスワードは8文字以上）。</p>
       <form onSubmit={onSubmit}>
-        <div className="row">
+        <div className="row" style={{ alignItems: "flex-start" }}>
           <div style={{ flex: 1, minWidth: 240 }}>
             <div className="muted">Email</div>
             <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" />
@@ -52,11 +52,15 @@ export default function RegisterPage() {
             <div className="muted">Password</div>
             <input
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value.slice(0, PASSWORD_MAX_LENGTH))}
               placeholder="********"
               type="password"
               autoComplete="new-password"
+              maxLength={PASSWORD_MAX_LENGTH}
             />
+            <div className="muted" style={{ fontSize: 12, marginTop: 4 }}>
+              {PASSWORD_MIN_LENGTH}〜{PASSWORD_MAX_LENGTH}文字（{password.length}/{PASSWORD_MAX_LENGTH}）
+            </div>
             {fieldErrors.password && <div className="error">{fieldErrors.password}</div>}
           </div>
         </div>

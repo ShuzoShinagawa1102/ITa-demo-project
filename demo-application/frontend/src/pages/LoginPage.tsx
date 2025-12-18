@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ApiError } from "../api/http";
 import { useAuth } from "../state/auth";
-import { loginSchema } from "../validation/schemas";
+import { loginSchema, PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH } from "../validation/schemas";
 
 export default function LoginPage() {
   const auth = useAuth();
@@ -42,7 +42,7 @@ export default function LoginPage() {
       <h2 style={{ marginTop: 0 }}>Login</h2>
       <p className="muted">ログインしてカート・注文機能を利用します。</p>
       <form onSubmit={onSubmit}>
-        <div className="row">
+        <div className="row" style={{ alignItems: "flex-start" }}>
           <div style={{ flex: 1, minWidth: 240 }}>
             <div className="muted">Email</div>
             <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" />
@@ -52,11 +52,15 @@ export default function LoginPage() {
             <div className="muted">Password</div>
             <input
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value.slice(0, PASSWORD_MAX_LENGTH))}
               placeholder="********"
               type="password"
               autoComplete="current-password"
+              maxLength={PASSWORD_MAX_LENGTH}
             />
+            <div className="muted" style={{ fontSize: 12, marginTop: 4 }}>
+              {PASSWORD_MIN_LENGTH}〜{PASSWORD_MAX_LENGTH}文字（{password.length}/{PASSWORD_MAX_LENGTH}）
+            </div>
             {fieldErrors.password && <div className="error">{fieldErrors.password}</div>}
           </div>
         </div>
