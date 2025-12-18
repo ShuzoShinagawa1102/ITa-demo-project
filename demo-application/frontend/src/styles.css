@@ -1,0 +1,113 @@
+:root {
+  --bg: #0b1220;
+  --panel: #111a2e;
+  --panel2: #0f1730;
+  --text: #e8eefc;
+  --muted: #a9b7dd;
+  --accent: #6aa5ff;
+  --danger: #ff6a8a;
+  --ok: #32d583;
+  --border: rgba(255, 255, 255, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
+    "Segoe UI Emoji";
+  background: radial-gradient(1200px 800px at 20% 0%, rgba(106, 165, 255, 0.22), transparent 55%),
+    radial-gradient(900px 700px at 90% 30%, rgba(50, 213, 131, 0.14), transparent 55%),
+    var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.panel {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.space {
+  height: 12px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.btn {
+  background: rgba(106, 165, 255, 0.14);
+  border: 1px solid rgba(106, 165, 255, 0.32);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.btn:hover {
+  background: rgba(106, 165, 255, 0.2);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btnDanger {
+  background: rgba(255, 106, 138, 0.12);
+  border: 1px solid rgba(255, 106, 138, 0.32);
+}
+
+.btnOk {
+  background: rgba(50, 213, 131, 0.12);
+  border: 1px solid rgba(50, 213, 131, 0.32);
+}
+
+input {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 10px;
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  padding: 10px 6px;
+}
+th {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.error {
+  color: var(--danger);
+}
+

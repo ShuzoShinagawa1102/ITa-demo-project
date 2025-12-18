@@ -1,0 +1,41 @@
+#!/bin/sh
+# ----------------------------------------------------------------------------
+# Maven Wrapper bootstrap script
+# ----------------------------------------------------------------------------
+
+set -euf
+
+BASE_DIR=$(cd "$(dirname "$0")" && pwd)
+WRAPPER_DIR="$BASE_DIR/.mvn/wrapper"
+WRAPPER_JAR="$WRAPPER_DIR/maven-wrapper.jar"
+PROPS="$WRAPPER_DIR/maven-wrapper.properties"
+
+if [ ! -f "$PROPS" ]; then
+  echo "Missing $PROPS" >&2
+  exit 1
+fi
+
+wrapperUrl=$(grep -E '^wrapperUrl=' "$PROPS" | cut -d'=' -f2-)
+distributionUrl=$(grep -E '^distributionUrl=' "$PROPS" | cut -d'=' -f2-)
+
+mkdir -p "$WRAPPER_DIR"
+
+download() {
+  url="$1"
+  out="$2"
+  if command -v curl >/dev/null 2>&1; then
+    curl -fsSL "$url" -o "$out"
+  elif command -v wget >/dev/null 2>&1; then
+    wget -q "$url" -O "$out"
+  else
+    echo "curl or wget is required to download $url" >&2
+    exit 1
+  fi
+}
+
+if [ ! -f "$WRAPPER_JAR" ]; then
+  echo "Downloading Maven Wrapper..."
+  download "$wrapperUrl" "$WRAPPER_JAR"
+fi
+
+exec java -Dmaven.multiModuleProjectDirectory="$BASE_DIR" -classpath "$WRAPPER_JAR" org.apache.maven.wrapper.MavenWrapperMain "$@"

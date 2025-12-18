@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: ${SHOP_DB_URL:jdbc:postgresql://localhost:5432/shop}
+    username: ${SHOP_DB_USER:shop}
+    password: ${SHOP_DB_PASSWORD:shop}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  flyway:
+    enabled: true
+
+app:
+  security:
+    jwt:
+      issuer: demo-shop
+      secret: ${SHOP_JWT_SECRET:change-me-in-env}
+      accessTokenMinutes: 60
+

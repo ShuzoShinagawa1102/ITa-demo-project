@@ -1,0 +1,11 @@
+**/node_modules/
+**/dist/
+**/target/
+**/*.tsbuildinfo
+**/.idea/
+**/.vscode/
+**/*.iml
+**/.DS_Store
+demo-application/backend/.mvn/wrapper/maven-wrapper.jar
+demo-application/backend/backend.log
+demo-application/backend/backend.err.log
