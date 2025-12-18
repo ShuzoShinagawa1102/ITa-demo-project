@@ -6,6 +6,10 @@
 **/.vscode/
 **/*.iml
 **/.DS_Store
+**/.venv/
+**/__pycache__/
+**/*.pyc
+**/.pytest_cache/
 demo-application/backend/.mvn/wrapper/maven-wrapper.jar
 demo-application/backend/backend.log
 demo-application/backend/backend.err.log
